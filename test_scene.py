@@ -27,8 +27,8 @@ def FloorObj(parentNode=None, name="Floor",
 
     
     objectCollis.createObject('Triangle', moving=False, simulated=False)
-    #objectCollis.createObject('TLineModel', moving=False, simulated=False)
-    #objectCollis.createObject('TPointModel', moving=False, simulated=False)
+    objectCollis.createObject('TLineModel', moving=False, simulated=False)
+    objectCollis.createObject('TPointModel', moving=False, simulated=False)
 
     
     objectCollis.createObject('RigidMapping')
@@ -47,6 +47,7 @@ def FloorObj(parentNode=None, name="Floor",
     return floor
 
 
+
 def createScene(node):
 
     node.gravity = "0 -9.8 0"
@@ -56,13 +57,22 @@ def createScene(node):
     node.createObject("RequiredPlugin", name="SofaMiscCollision")
 
     node.createObject("RequiredPlugin", name="SofaOpenglVisual")
-    node.createObject("CollisionPipeline", verbose="0", draw="0")
-    node.createObject("BruteForceDetection", name="N2")
-    node.createObject("NewProximityIntersection", name="Proximity", \
-     alarmDistance="2", contactDistance="1")
+    node.createObject("CollisionPipeline", verbose="0", draw="1")
+    node.createObject("BruteForceDetection", name="both_maybe")
+    node.createObject("DefaultAnimationLoop") #can I get away with that?
+    node.createObject("GenericConstraintSolver", maxIterations="1000", tolerance="0.001")
+    node.createObject("DefaultContactManager", response="FrictionContact", responseParams="mu=0.5")
+    node.createObject("MinProximityIntersection", alarmDistance="1", contactDistance="0.1")
+    #node.createObject("BruteForceDetection", name="N2")
+    #node.createObject("NewProximityIntersection", name="Proximity", \
+    # alarmDistance="2", contactDistance="1")
+    #node.createObject("CollisionResponse", name="Response", response="default")
 
-    node.createObject("CollisionResponse", name="Response", response="default")
+    # 1 LocalMinDistance -- intersection method
 
+    # 2 BruteForceDetection -- broadphase collision detection
+    # 3 BruteForceDetection -- ?? narrow phse deection    # 4 DefaultContactManager (alieas CollisionResponse) -- config w/
+    # response="FrictionContact", responseParams="mu=0.6"?
     node.createObject('MeshGmshLoader', name='meshLoaderCoarse', \
     filename=dirPath+"mesh/arm_low.msh", scale="0.5")
 
