@@ -8,7 +8,8 @@ from stlib.components import addOrientedBoxRoi
 from splib.numerics import vec3
 from splib.objectmodel import setData, setTreeData
 from splib.numerics.quat import Quat
-
+from splib.objectmodel import SofaPrefab, SofaObject
+from splib.numerics import getOrientedBoxFromTransform
 
 dirPath = os.path.dirname(os.path.abspath(__file__))+'/'
 
@@ -42,7 +43,7 @@ def ElasticBody(parent, translation = [0., 0., 0.]):
     e = ElasticMaterialObject(body,
                               volumeMeshFileName="mesh/cube_low_res.msh",
                               translation=translation, rotation=[0, 0, 0],
-                              youngModulus=1, poissonRatio=0.45, totalMass=0.032)
+                              youngModulus=10, poissonRatio=0.45, totalMass=0.032)
 
     '''
     visual = body.createChild("Visual")
@@ -56,53 +57,6 @@ def ElasticBody(parent, translation = [0., 0., 0.]):
                         output=visual.renderer.getLinkPath())
     '''
     return body
-
-def myElasticMaterialObject(parent, volumeMeshFileName=None,
-    name="ElasticMaterialObject",
-    rotation=[0.0, 0.0, 0.0],
-    translation=[0.0, 0.0, 0.0],
-    scale=[1.0, 1.0, 1.0],
-    collisionMesh=None,
-    withConstrain=True,
-    surfaceColor=[1.0, 1.0, 1.0],
-    poissonRatio=0.3,
-    youngModulus=4,
-    totalMass="1.0", solver=None):
-
-    node = parent.createChild(name)
-
-    loader = node.createObject('MeshGmshLoader', \
-        name='loader', filename=volumeMeshFileName, \
-        rotation=rotation, translation=translation, \
-        scale3d=scale)
-
-    integration = node.createObject('EulerImplicitSolver', name='integration')
-    solver = node.createObject('SparseLDLSolver', name="solver")
-
-    container = node.createObject('TetrahedronSetTopologyContainer', src='@loader', name='container')
-    dofs = node.createObject('MechanicalObject', template='Vec3d', name='dofs')
-
-    mass = node.createObject('UniformMass', totalMass=totalMass, name='mass')
-
-    forcefield = node.createObject('TetrahedronFEMForceField', template='Vec3d',
-                                        method='large', name='forcefield',
-                                        poissonRatio=poissonRatio,  youngModulus=youngModulus)
-
-
-
-
-    node.createObject('LinearSolverConstraintCorrection')
-    
-    if True and collisionMesh:
-        collisionmodel = node.createChild('CollisionModel')
-        collisionmodel.createObject('MeshObjLoader', name='loader', filename=collisionMesh, rotation=rotation, translation=translation, scale=scale)
-        collisionmodel.createObject('TriangleSetTopologyContainer', src='@loader', name='container')
-        collisionmodel.createObject('MechanicalObject', template='Vec3d', name='dofs')
-        collisionmodel.createObject('Triangle')
-        collisionmodel.createObject('Line')
-        collisionmodel.createObject('Point')
-        collisionmodel.createObject('BarycentricMapping')
-
 
 
 
@@ -159,6 +113,9 @@ def createScene(node):
     node.gravity = "0 -9.8 0"
     node.name="root"
 
+
+
+
     required_plugins = ("SofaMiscCollision", "SofaSparseSolver","SofaOpenglVisual")
     for i in required_plugins:
         node.createObject("RequiredPlugin", name=i)
@@ -180,6 +137,10 @@ def createScene(node):
 
 
     translation = [0.0, 30., 0.]
+
+    node.createObject("CGLinearSolver", iterations=250, tolerance=1e-20, threshold=1e-20)
+
+    node.createObject("CGLinearSolver", iterations=250, tolerance=1e-20, threshold=1e-20)
 
     '''
     cube1 = node.createChild("Cube1")
@@ -226,13 +187,10 @@ def createScene(node):
                                 frames=frames, \
                                 name="RigidifiedStructure")
 
-    #rigidifiedstruct.DeformableParts.createObject("EulerImplicitSolver", name="EulerImplicit rigidifiedstruct")
-    #rigidifiedstruct.DeformableParts.createObject("SparseLDLSolver", name="Solver rigidifiedstruct")
-    #rigidifiedstruct.createObject("EulerImplicitSolver", name="EulerImplicit rigidifiedstruct")
-    #rigidifiedstruct.createObject("SparseLDLSolver", name="Solver rigidifiedstruct")
 
-    rigidifiedstruct.DeformableParts.createObject("UncoupledConstraintCorrection")
-    rigidifiedstruct.RigidParts.createObject("UncoupledConstraintCorrection")
+    #rigidifiedstruct.DeformableParts.createObject("UncoupledConstraintCorrection", name="UCup deform")
+    #rigidifiedstruct.RigidParts.createObject("UncoupledConstraintCorrection", name="UCup rigid")
+
     # Use this to activate some rendering on the rigidified object
     setData(rigidifiedstruct.RigidParts.dofs, showObject=True, showObjectScale=10, drawMode=2)
     setData(rigidifiedstruct.RigidParts.RigidifiedParticules.dofs, showObject=True, showObjectScale=1,
@@ -241,10 +199,13 @@ def createScene(node):
 
 
     myfloor(node, translation="0 -100 0")
-
-    FixingBox(node, eb, scale=[10, 10, 10], translation=[0., 0, 0.])
-
-
+    t_plus_a = translation
+    adjustment2 = [7, 0, 0]
+    for i, v in enumerate(adjustment2):
+        t_plus_a[i] -= v
+    FixingBox(node, eb, scale=[10, 10, 10], translation=translation)
+    node.FixingBox.BoxROI.drawBoxes = True
+    '''
     cube2 = node.createChild("Cube2")
     cube2.createObject("EulerImplicitSolver", name="EulerImplicit Cube2")
     cube2.createObject("SparseLDLSolver", name="Solver Cube2")
@@ -266,7 +227,7 @@ def createScene(node):
     
     cube2.createObject("LinearSolverConstraintCorrection")
     return
-    
+    '''
     #arm(node)
 
     print("HELLOOO")
