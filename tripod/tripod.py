@@ -9,7 +9,7 @@ from splib.numerics import vec3
 from splib.numerics.quat import Quat
 from tutorial import *
 from splib.objectmodel import setData, setTreeData
-
+from stlib.physics.rigid import Cube
 
 
 def ElasticBody(parent):
@@ -44,7 +44,7 @@ class Tripod(SofaObject):
         numstep = numMotors
         self.actuatedarms = []
 
-        '''
+
         for i in range(0, numstep):
             name = "ActuatedArm"+str(i)
             translation, eulerRotation = self.__getTransform(i, numstep, angleShift, radius, dist)
@@ -55,7 +55,7 @@ class Tripod(SofaObject):
             arm.ServoMotor.minAngle = -2.0225
             arm.ServoMotor.maxAngle = -0.0255
 
-        '''
+
         self.__attachToActuatedArms(radius, numMotors, angleShift)
 
         self.addCollision()
@@ -85,6 +85,7 @@ class Tripod(SofaObject):
         numstep = numMotors
         groupIndices = []
         frames = []
+
         for i in range(0, numstep):
             translation, eulerRotation = self.__getTransform(i, numstep, angleShift, radius, dist)
             box = addOrientedBoxRoi(self.node, position=deformableObject.dofs.getData("rest_position"), name="BoxROI"+str(i),
@@ -100,7 +101,7 @@ class Tripod(SofaObject):
         # Rigidify the deformable part at extremity to attach arms
         rigidifiedstruct = Rigidify(self.node, deformableObject, groupIndices=groupIndices, frames=frames, name="RigidifiedStructure")
         rigidifiedstruct.DeformableParts.createObject("UncoupledConstraintCorrection")
-        rigidifiedstruct.RigidParts.createObject("UncoupledConstraintCorrection")
+        #rigidifiedstruct.RigidParts.createObject("UncoupledConstraintCorrection")
 
         # Use this to activate some rendering on the rigidified object ######################################
         setData(rigidifiedstruct.RigidParts.dofs, showObject=True, showObjectScale=10, drawMode=2)
@@ -116,6 +117,8 @@ class Tripod(SofaObject):
                                                      external_rest_shape=self.mapped_dof,
                                                      stiffness='1e12', angularStiffness='1e12')
         '''
+        print(self.actuatedarms[0].servoarm.dofs)
+
         for i in range(0, numstep):
             rigidifiedstruct.RigidParts.createObject('RestShapeSpringsForceField', name="rssff"+str(i),
                                                      points=i,
@@ -129,24 +132,26 @@ class Tripod(SofaObject):
         '''
 
 
+
 def myfloor(parentNode, translation):
-    myfloorsm(parentNode, translation="0 0 0" ,name="fl1")
+    dst = -88
+    myfloorsm(parentNode, translation=[0, 0, 0], name="fl1")
 
-    myfloorsm(parentNode, translation="25 0 0", name="fl2")
+    myfloorsm(parentNode, translation=[dst, 0, 0], name="fl2")
 
-    myfloorsm(parentNode, translation="0 0 25", name="fl3")
-    myfloorsm(parentNode, translation="25 0 25", name="fl4")
+    myfloorsm(parentNode, translation=[dst, 0, dst], name="fl3")
+    myfloorsm(parentNode, translation=[0, 0, dst], name="fl4")
 
 def myfloorsm(parentNode=None, name="floor", translation="0 0 0", rotation="0 0 0"):
     fl = parentNode.createChild(name)
     fl.createObject("MeshTopology", name="Topology "+name, filename="mesh/floor.obj", scale=0.03,
                     )
     fl.createObject("MechanicalObject", name="Particles "+ name, translation=translation)
-    #fl.createObject("TriangleModel", name="Triangle for collision floor", moving="0",\
-    #    simulated="0")
+    fl.createObject("TriangleCollisionModel", name="Triangle for collision floor", moving="0",\
+        simulated="0")
 
-    fl.createObject("SphereCollisionModel", name="Floor", listRadius="5", \
-                        simulated="0", moving="0", contactStiffness="100000")
+    #fl.createObject("SphereCollisionModel", name="Floor", listRadius="5", \
+    #                    simulated="0", moving="0", contactStiffness="100000")
 
     ### spehre
 
@@ -203,8 +208,11 @@ def createScene(rootNode):
     fl = myfloor(scene.Modelling, translation="0 -100 0")
     #sp = sphere(scene.Modelling)
     scene.VisualStyle.displayFlags = "showBehavior"
+    cube = Cube(scene.Modelling, name="Cube Hard", uniformScale=20.0, translation=[0, 23.64, -60.6])
+    print(dir(cube.mstate))
+    tripod = Tripod(scene.Modelling, numMotors=1, mapped_dof=cube.mstate)
 
-    tripod = Tripod(scene.Modelling, numMotors=1)
+
 
     scene.Simulation.addChild(tripod.RigidifiedStructure)
     #scene.Simulation.addChild(fl)
