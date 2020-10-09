@@ -155,8 +155,8 @@ def myfloorsm(parentNode=None, name="floor", translation="0 0 0", rotation="0 0 
 
 def sphere(parentNode):
     sphere = parentNode.createChild("Sphere")
-    sphere.createObject("EulerImplicitSolver", rayleighStiffness="0.1")
-    sphere.createObject("CGLinearSolver", iterations="200", tolerance="1e-06", threshold="1e-06")
+    #sphere.createObject("EulerImplicitSolver", rayleighStiffness="0.1")
+    #sphere.createObject("CGLinearSolver", iterations="200", tolerance="1e-06", threshold="1e-06")
     sphere.createObject("MechanicalObject", template="Rigid3d", name="myParticle", \
                         position="-5 10 0    0 0 0 1", showObject="1", showObjectScale="0.5")
 
@@ -202,15 +202,15 @@ def createScene(rootNode):
     addContact(scene)
     fl = myfloor(scene.Modelling, translation="0 -100 0")
     sp = sphere(scene.Modelling)
-    #scene.VisualStyle.displayFlags = "showBehavior"
+    scene.VisualStyle.displayFlags = "showBehavior"
+    mapped_dof = sp.myParticle
+    tripod = Tripod(scene.Modelling, numMotors=1, mapped_dof=mapped_dof)
 
-    #tripod = Tripod(scene.Modelling, numMotors=1)
-
-    #scene.Simulation.addChild(tripod.RigidifiedStructure)
+    scene.Simulation.addChild(tripod.RigidifiedStructure)
     #scene.Simulation.addChild(fl)
-    scene.Simulation.addChild(sp)
-    #motors = scene.Simulation.createChild("Motors")
-    #motors.addChild(tripod.ActuatedArm0)
+    #scene.Simulation.addChild(sp)
+    motors = scene.Simulation.createChild("Motors")
+    motors.addChild(tripod.ActuatedArm0)
     #motors.addChild(tripod.ActuatedArm1)
     #motors.addChild(tripod.ActuatedArm2)
 
