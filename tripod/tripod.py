@@ -201,10 +201,10 @@ def createScene(rootNode):
 
     addContact(scene)
     fl = myfloor(scene.Modelling, translation="0 -100 0")
-    sp = sphere(scene.Modelling)
+    #sp = sphere(scene.Modelling)
     scene.VisualStyle.displayFlags = "showBehavior"
-    mapped_dof = sp.myParticle
-    tripod = Tripod(scene.Modelling, numMotors=1, mapped_dof=mapped_dof)
+
+    tripod = Tripod(scene.Modelling, numMotors=1)
 
     scene.Simulation.addChild(tripod.RigidifiedStructure)
     #scene.Simulation.addChild(fl)
