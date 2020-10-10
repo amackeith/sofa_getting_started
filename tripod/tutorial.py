@@ -77,8 +77,8 @@ def Scene(parent, **kwargs):
     parent.createObject("GenericConstraintSolver", maxIterations=250, tolerance=1e-20)
 
     ctx = scene.Config
-    ctx.createObject("MeshSTLLoader", name="loader", filename=getLoadingLocation("data/mesh/blueprint.stl", __file__))
-    ctx.createObject("OglModel", src="@loader")
+    #ctx.createObject("MeshSTLLoader", name="loader", filename=getLoadingLocation("data/mesh/blueprint.stl", __file__))
+    #ctx.createObject("OglModel", src="@loader")
     ctx.createObject("AddDataRepository", path=os.path.abspath(os.path.dirname(__file__)))
 
     return parent

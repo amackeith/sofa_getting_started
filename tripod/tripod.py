@@ -45,6 +45,7 @@ class Tripod(SofaObject):
         self.actuatedarms = []
 
 
+        '''
         for i in range(0, numstep):
             name = "ActuatedArm"+str(i)
             translation, eulerRotation = self.__getTransform(i, numstep, angleShift, radius, dist)
@@ -54,7 +55,7 @@ class Tripod(SofaObject):
             # Add limits to angle that correspond to limits on real robot
             arm.ServoMotor.minAngle = -2.0225
             arm.ServoMotor.maxAngle = -0.0255
-
+        '''
 
         self.__attachToActuatedArms(radius, numMotors, angleShift)
 
@@ -101,7 +102,7 @@ class Tripod(SofaObject):
         # Rigidify the deformable part at extremity to attach arms
         rigidifiedstruct = Rigidify(self.node, deformableObject, groupIndices=groupIndices, frames=frames, name="RigidifiedStructure")
         rigidifiedstruct.DeformableParts.createObject("UncoupledConstraintCorrection")
-        #rigidifiedstruct.RigidParts.createObject("UncoupledConstraintCorrection")
+        rigidifiedstruct.RigidParts.createObject("UncoupledConstraintCorrection")
 
         # Use this to activate some rendering on the rigidified object ######################################
         setData(rigidifiedstruct.RigidParts.dofs, showObject=True, showObjectScale=10, drawMode=2)
@@ -113,8 +114,8 @@ class Tripod(SofaObject):
         # Attach arms
         if self.mapped_dof != None:
             rigidifiedstruct.RigidParts.createObject('RestShapeSpringsForceField', name="rssff" + str(i),
-                                                     points=i,
-                                                     external_rest_shape=self.mapped_dof,
+                                                     points=0,
+                                                     external_rest_shape=self.mapped_dof.getLinkPath(), index=1,
                                                      stiffness='1e12', angularStiffness='1e12')
         '''
         print(self.actuatedarms[0].servoarm.dofs)
@@ -194,6 +195,111 @@ def cube(rootNode):
                        name="Spheres For Collision Cube1", radius="0.25")
     cube1.createObject("LinearSolverConstraintCorrection")
 
+
+@SofaPrefab
+class myCube(SofaObject):
+
+    def __init__(self, parent, translation=[0, 23.64, -60.6], rotation="0 0 0", scale=[1.0,1.0,1.0]):
+
+        self.node = parent.createChild("articulation")
+        self.node.createObject("MechanicalObject", name="Articulations", template="Vec1d", position="0")
+        Cube(self.node, name="cubehard", uniformScale=20, translation=translation)
+
+        sub_node = self.node.createChild("sub_node")
+
+        factor = 25
+        sub_node.createObject("MechanicalObject", template="Rigid3d", name="DOFs",
+                               position=[[0., 0., 0., 0.,0.,0.,1],[0., 0., factor, 0.,0.,0.,1]])
+        #sub_node.createObject("BeamFEMForceField", name="FEM", radius="0.1", youngModulus="1e8",
+        #                       poissonRatio="0.45")
+        sub_node.createObject("MeshTopology", name="Lines", lines="0 1")
+        sub_node.createObject("UniformMass", template="Rigid3d", name="Mass",
+                               vertexMass="0.1 0.1 [1 0 0,0 1 0,0 0 1]")
+
+        #sub_node.createObject("FixedConstraint", template="Rigid3d", name="fixOrigin", indices=0)
+        sub_node.createObject("ArticulatedSystemMapping", input1="@../Articulations",
+                              input2="@../cubehard/mstate",
+                              output="@DOFs")
+
+        sub_sub_node = sub_node.createChild("arm")
+        sub_sub_node.createObject("MechanicalObject", template="Rigid3d", name="DOFs",
+                                  position=[0., 0.,factor, 0.,0.,0.,1])
+        sub_sub_node.createObject('RigidRigidMapping',
+                               name="mapping", input="@../DOFs", index=1)
+
+        self.node.createObject("ArticulatedHierarchyContainer")
+
+        art_cen = self.node.createChild("articulationCenters")
+        art1 = art_cen.createChild("articulationCenter1")
+        art1.createObject("ArticulationCenter", parentIndex="0", childIndex="1", posOnParent="0 0 0",
+                                posOnChild=[0, 0, -1*factor], articulationProcess="2" )
+
+        artt = art1.createChild("articulations")
+        artt.createObject("Articulation", translation="0", rotation="1", rotationAxis="1 0 0",
+                          articulationIndex="0")
+
+        self.node.createObject("LinearSolverConstraintCorrection")
+        '''
+        # The inputs
+        self.node.addNewData("minAngle", "S90Properties", "min angle of rotation (in radians)", "float", -100)
+        self.node.addNewData("maxAngle", "S90Properties", "max angle of rotation (in radians)", "float", 100)
+        self.node.addNewData("angleIn", "S90Properties", "angle of rotation (in radians)", "float", 0)
+
+        # Two positions (rigid): first one for the servo body, second for the servo wheel
+        t3ranslation = [0, 55, -0]
+        baseFrame = self.node.createChild("BaseFrame")
+        baseFrame.createObject("MechanicalObject", name="dofs", template="Rigid3",
+                               position=[[0., 0., 0., 0., 0., 0., 1.], [0., 0., 0., 0., 0., 0., 1.]],
+                               translation=translation, rotation=rotation, scale3d=scale)
+
+        # Angle of the wheel
+        angle = self.node.createChild("Angle")
+        angle.createObject("MechanicalObject", name="dofs", template="Vec1d",
+                           position=self.node.getData("angleIn").getLinkPath())
+        # This component is used to constrain the angle to lie between a maximum and minimum value,
+        # corresponding to the limit     of the real servomotor
+        angle.createObject("ArticulatedHierarchyContainer")
+        angle.createObject("ArticulatedSystemMapping", input1=angle.dofs.getLinkPath(),
+                           output=baseFrame.dofs.getLinkPath())
+        angle.createObject('StopperConstraint', name="AngleLimits", index=0,
+                           min=self.node.getData("minAngle").getLinkPath(),
+                           max=self.node.getData("maxAngle").getLinkPath())
+        angle.createObject("UncoupledConstraintCorrection")
+
+        articulationCenter = angle.createChild("ArticulationCenter")
+        articulationCenter.createObject("ArticulationCenter", parentIndex=0, childIndex=1, posOnParent=[0., 0., 0.],
+                                        posOnChild=[0., 0., 0.])
+        articulation = articulationCenter.createChild("Articulations")
+        articulation.createObject("Articulation", translation=False, rotation=True, rotationAxis=[1, 0, 0],
+                                  articulationIndex=0)
+
+        #output = self.node.cubehard.mstate.getLinkPath(),
+        self.node.cubehard.createObject("RigidRigidMapping", input=self.node.BaseFrame.dofs.getLinkPath(),
+                output=self.node.cubehard.mstate.getLinkPath(), index=1)
+
+        arm = self.node.createChild("arm")
+        arm.createObject("MechanicalObject", name="dofs", template="Rigid3",
+                           position=[0.,0.,0.,0.,0.,0.,1.0])
+
+
+        arm.createObject("RigidRigidMapping", input=self.node.BaseFrame.dofs.getLinkPath(),
+                         output=self.node.arm.dofs.getLinkPath(), index=0)
+
+        # The output
+        self.node.addNewData("angleOut", "S90Properties", "angle of rotation (in degree)", "float",
+                             angle.dofs.getData("position").getLinkPath())
+
+        self.node.BaseFrame.init()
+        self.node.BaseFrame.dofs.rotation = [0., 0., 0.]
+        self.node.BaseFrame.dofs.translation = [0., 0., 0.]
+        '''
+
+
+
+
+
+
+
 def createScene(rootNode):
     scene = Scene(rootNode)
     rootNode.dt = 0.001
@@ -208,17 +314,19 @@ def createScene(rootNode):
     fl = myfloor(scene.Modelling, translation="0 -100 0")
     #sp = sphere(scene.Modelling)
     scene.VisualStyle.displayFlags = "showBehavior"
-    cube = Cube(scene.Modelling, name="Cube Hard", uniformScale=20.0, translation=[0, 23.64, -60.6])
-    print(dir(cube.mstate))
-    tripod = Tripod(scene.Modelling, numMotors=1, mapped_dof=cube.mstate)
+    cube = myCube(scene.Modelling)
+    #print(dir(cube.mstate))
+    tripod = Tripod(scene.Modelling, numMotors=1,
+                    mapped_dof=scene.Modelling.articulation.sub_node.arm.DOFs)
 
 
 
-    scene.Simulation.addChild(tripod.RigidifiedStructure)
+    #scene.Simulation.addChild(tripod.RigidifiedStructure)
+    scene.Simulation.addChild(scene.Modelling)
     #scene.Simulation.addChild(fl)
     #scene.Simulation.addChild(sp)
     motors = scene.Simulation.createChild("Motors")
-    motors.addChild(tripod.ActuatedArm0)
+    #motors.addChild(tripod.ActuatedArm0)
     #motors.addChild(tripod.ActuatedArm1)
     #motors.addChild(tripod.ActuatedArm2)
 

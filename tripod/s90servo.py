@@ -84,7 +84,7 @@ class ServoMotor(SofaObject):
         angle = self.node.createChild("Angle")
         angle.createObject("MechanicalObject", name="dofs", template="Vec1d", position=self.node.getData("angleIn").getLinkPath())
         # This component is used to constrain the angle to lie between a maximum and minimum value,
-        # corresponding to the limit     of the real servomotor
+        # corresponding to the limit of the real servomotor
         angle.createObject("ArticulatedHierarchyContainer")
         angle.createObject("ArticulatedSystemMapping", input1=angle.dofs.getLinkPath(), output=baseFrame.dofs.getLinkPath())
         angle.createObject('StopperConstraint', name="AngleLimits", index=0, min=self.node.getData("minAngle").getLinkPath(), max=self.node.getData("maxAngle").getLinkPath())
