@@ -327,9 +327,10 @@ def createScene(rootNode):
     #tripod = Tripod(scene.Modelling, numMotors=1,
     #                mapped_dof=scene.Modelling.articulation.sub_node.arm.DOFs)
 
-    sm_cube(scene.Modelling, translation=[0.0, 0.0, 0.0], mapped_dof=scene.Modelling.articulation.sub_node.arm.DOFs)
+    #sm_cube(scene.Modelling, translation=[0.0, 0.0, 0.0], mapped_dof=scene.Modelling.articulation.sub_node.arm.DOFs)
 
     #scene.Simulation.addChild(tripod.RigidifiedStructure)
+    
     scene.Simulation.addChild(scene.Modelling)
     #scene.Simulation.addChild(fl)
     #scene.Simulation.addChild(sp)

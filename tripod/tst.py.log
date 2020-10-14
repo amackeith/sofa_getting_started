@@ -1,0 +1,23 @@
+
+--- NEW SESSION: 12/10/2020 15:03:10 ---
+/Modelling/one/cubehard/mstate.constraint = 0 1 0 1 0 0 0 0 0  
+1 1 0 0 1 0 0 0 0  
+2 1 0 0 0 1 0 0 0  
+3 1 0 0 0 0 1 0 0  
+4 1 0 0 0 0 0 1 0  
+5 1 0 0 0 0 0 0 1  
+
+/Modelling/one/cubehard/mstate.showColor = 1 1 1 1
+/Modelling/one/cubehard/mstate.velocity = -1.4e+06 -58.86 0 0 0 0
+/Modelling/one/cubehard/mstate.force = 0 -9810 0 0 0 0
+/Modelling/one/cubehard/mstate.free_velocity = 580000 -58.86 0 0 0 0
+/Modelling/one/cubehard/mstate.constraint = 0 1 0 1 0 0 0 0 0  
+1 1 0 0 1 0 0 0 0  
+2 1 0 0 0 1 0 0 0  
+3 1 0 0 0 0 1 0 0  
+4 1 0 0 0 0 0 1 0  
+5 1 0 0 0 0 0 0 1  
+
+/Modelling/one/cubehard/mstate.9(V_DERIV) = -990000 0 0 0 0 0
+/Modelling/one/cubehard/mstate.10(V_DERIV) = -1980 0 0 0 0 0
+/Modelling/one/cubehard/mstate.showColor = 1 1 1 1
