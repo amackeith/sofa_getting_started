@@ -1,18 +1,25 @@
 import Sofa
-
+import sys
 import os
 from stlib.physics.constraints import FixedBox
 from stlib.scene import Scene
+from splib.animation import animate
+
+
 
 Translation = [0, 0, 0]
 
 BoxROICoordinates=[-5 + Translation[0], -100 + Translation[1], -5 + Translation[2],  5 + Translation[0], -100+4.5 + Translation[1], 5 + Translation[2]]
-
-path = os.path.dirname(os.path.abspath(__file__)) + '/mesh/pipe_climber/'
-path = os.path.dirname(os.path.abspath(__file__)) + '/mesh/gmsh_tst/'
+path = os.path.dirname(os.path.abspath(__file__)) + '/'
 
 
-def createScene(rootNode):
+def createSceneReal(rootNode):
+    #print sys.argv
+    #sys.exit()
+    length_scale = sys.argv[1]
+    length_scale = ""
+    disk_msh = 'disk_'+length_scale+'.msh'
+    disk_inside_msh = 'disk_inside'+length_scale+'.msh'
     rootNode = Scene(rootNode, gravity=[0.0, -0.0, 0.0], dt=0.001)
     rootNode.createObject('RequiredPlugin', pluginName='SoftRobots')
     rootNode.createObject('VisualStyle',
@@ -27,7 +34,7 @@ def createScene(rootNode):
     bunny.createObject('ShewchukPCGLinearSolver', iterations='15', name='linearsolver', tolerance='1e-5',
                        preconditioners='preconditioner', use_precond='true', update_step='1')
     
-    bunny.createObject('MeshGmshLoader', name='loader', filename=path + 'disk.msh')
+    bunny.createObject('MeshGmshLoader', name='loader', filename=path + disk_msh)
     bunny.createObject('TetrahedronSetTopologyContainer', src='@loader', name='container')
     bunny.createObject('TetrahedronSetTopologyModifier')
     bunny.createObject('TetrahedronSetTopologyAlgorithms', template='Vec3d')
@@ -49,7 +56,7 @@ def createScene(rootNode):
     
     # bunny/cavity
     cavity = bunny.createChild('cavity')
-    cavity.createObject('MeshGmshLoader', name='loader', filename=path + 'disk_inside.msh')
+    cavity.createObject('MeshGmshLoader', name='loader', filename=path + disk_inside_msh)
     cavity.createObject('Mesh', src='@loader', name='topo')
     cavity.createObject('MechanicalObject', name='cavity')
     cavity.createObject('SurfacePressureConstraint', triangles='@topo.triangles', value='4000', valueType="1")
@@ -70,3 +77,42 @@ def createScene(rootNode):
     #FixedBox(bunny, doVisualization=True, atPositions=BoxROICoordinates)
     #bunny.FixedBox.BoxROI.show = True
     return rootNode
+
+
+def createScene(rootNode):
+
+    def animation(target, factor):
+        #target.angleIn = math.cos(factor * 2 * math.pi)
+
+
+        print(factor)
+        #if factor == 0:
+        #    keyboard.press_and_release("v")
+        #sys.exit(0)
+
+    def ExitFunc(target, factor):
+        import matplotlib.pyplot as plt
+        plt.plot([1,2,3,4])
+        plt.show()
+
+
+
+    #Scene(rootNode)
+
+    #rootNode.dt = 0.003
+    #rootNode.gravity = [0., -9810., 0.]
+    #rootNode.createObject("VisualStyle", displayFlags="showBehaviorModels")
+    
+    # Use these components on top of the scene to solve the constraint "StopperConstraint".
+    #rootNode.createObject("FreeMotionAnimationLoop")
+    #rootNode.createObject("GenericConstraintSolver", maxIterations=1e3, tolerance=1e-5)
+
+    #simulation = rootNode.createChild("Simulation")
+    #simulation.createObject("EulerImplicitSolver", rayleighStiffness=0.1, rayleighMass=0.1)
+    #simulation.createObject("CGLinearSolver", name="precond")
+    createSceneReal(rootNode)
+    #ServoMotor(simulation, showWheel=True)
+    animate(animation, {"target": None}, duration=3.5, mode="once", onDone=ExitFunc)
+
+    return rootNode
+
