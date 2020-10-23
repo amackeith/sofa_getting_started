@@ -17,7 +17,7 @@ def createSceneReal(rootNode):
     #print sys.argv
     #sys.exit()
     length_scale = sys.argv[1]
-    length_scale = ""
+    #length_scale = ""
     disk_msh = 'disk_'+length_scale+'.msh'
     disk_inside_msh = 'disk_inside'+length_scale+'.msh'
     rootNode = Scene(rootNode, gravity=[0.0, -0.0, 0.0], dt=0.001)
@@ -34,7 +34,7 @@ def createSceneReal(rootNode):
     bunny.createObject('ShewchukPCGLinearSolver', iterations='15', name='linearsolver', tolerance='1e-5',
                        preconditioners='preconditioner', use_precond='true', update_step='1')
     
-    bunny.createObject('MeshGmshLoader', name='loader', filename=path + disk_msh)
+    bunny.createObject('MeshGmshLoader', name='loader', rotation="90 0 0", filename=path + disk_msh)
     bunny.createObject('TetrahedronSetTopologyContainer', src='@loader', name='container')
     bunny.createObject('TetrahedronSetTopologyModifier')
     bunny.createObject('TetrahedronSetTopologyAlgorithms', template='Vec3d')
@@ -56,7 +56,7 @@ def createSceneReal(rootNode):
     
     # bunny/cavity
     cavity = bunny.createChild('cavity')
-    cavity.createObject('MeshGmshLoader', name='loader', filename=path + disk_inside_msh)
+    cavity.createObject('MeshGmshLoader', name='loader', rotation="90 0 0", filename=path + disk_inside_msh)
     cavity.createObject('Mesh', src='@loader', name='topo')
     cavity.createObject('MechanicalObject', name='cavity')
     cavity.createObject('SurfacePressureConstraint', triangles='@topo.triangles', value='4000', valueType="1")
@@ -84,13 +84,15 @@ def createScene(rootNode):
     def animation(target, factor):
         #target.angleIn = math.cos(factor * 2 * math.pi)
 
-
-        print(factor)
+        x = factor+1
+        #print(factor)
         #if factor == 0:
         #    keyboard.press_and_release("v")
         #sys.exit(0)
 
     def ExitFunc(target, factor):
+        import sys
+        sys.exit(0)
         import matplotlib.pyplot as plt
         plt.plot([1,2,3,4])
         plt.show()
@@ -112,7 +114,7 @@ def createScene(rootNode):
     #simulation.createObject("CGLinearSolver", name="precond")
     createSceneReal(rootNode)
     #ServoMotor(simulation, showWheel=True)
-    animate(animation, {"target": None}, duration=3.5, mode="once", onDone=ExitFunc)
+    animate(animation, {"target": None}, duration=10, mode="once", onDone=ExitFunc)
 
     return rootNode
 

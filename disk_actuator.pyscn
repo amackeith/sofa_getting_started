@@ -9,7 +9,7 @@ from softrobots.actuators import PneumaticCavity
 path = os.path.dirname(os.path.abspath(__file__)) + '/mesh/pipe_climber/'
 meshpath = path
 
-def createScene(rootNode):
+def eecreateScene(rootNode):
     rootNode = Scene(rootNode, gravity=[0.0, -0.0, 0.0], dt=0.00001)
     rootNode.createObject('RequiredPlugin', pluginName='SoftRobots')
     rootNode.createObject('VisualStyle',
@@ -55,7 +55,7 @@ def createScene(rootNode):
 
     
 
-def ecreateScene(rootNode):
+def createScene(rootNode):
     rootNode = Scene(rootNode, gravity=[0.0, -0.0, 0.0], dt=0.0001)
     rootNode.createObject('RequiredPlugin', pluginName='SoftRobots')
     rootNode.createObject('VisualStyle',
