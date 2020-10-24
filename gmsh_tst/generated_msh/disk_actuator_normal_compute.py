@@ -11,6 +11,7 @@ path = os.path.dirname(os.path.abspath(__file__)) + '/'
 meshpath = path
 
 def createSceneReal(rootNode):
+    length_scale = sys.argv[1]
     disk_msh = 'disk_'+length_scale+'.msh'
     disk_inside_stl = 'disk_inside'+length_scale+'.stl'
     rootNode = Scene(rootNode, gravity=[0.0, -0.0, 0.0], dt=0.001)
