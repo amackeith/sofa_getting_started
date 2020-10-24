@@ -10,7 +10,7 @@ for i in mesh_factors:
     print(cmd_string)
     os.system(cmd_string)
 
-    cmd_string = "gmsh -algo meshadapt -clscale "+size+" -1 -2 -o disk_inside"+size+".msh disk_inside.brep"
+    cmd_string = "gmsh -algo meshadapt -clscale "+size+" -1 -2 -format stl -o disk_inside"+size+".stl disk_inside.brep"
     print(cmd_string)
     os.system(cmd_string)
 
