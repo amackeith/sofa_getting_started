@@ -4,8 +4,8 @@ import os
 from stlib.physics.constraints import FixedBox
 from stlib.scene import Scene
 from splib.animation import animate
-
-
+import point_finder
+import numpy as np
 
 Translation = [0, 0, 0]
 
@@ -14,12 +14,24 @@ path = os.path.dirname(os.path.abspath(__file__)) + '/'
 
 
 def createSceneReal(rootNode):
+
     #print sys.argv
     #sys.exit()
     length_scale = sys.argv[1]
     #length_scale = ""
     disk_msh = 'disk_'+length_scale+'.msh'
     disk_inside_msh = 'disk_inside'+length_scale+'.msh'
+    
+    
+    # find point closest to zero (with positive z valu) 
+    vector, mid_ind = nth_smallest_point(disk_msh, 0)
+    i = 0
+    while vector[-1] < 0:
+        i += 1
+        vector, mid_ind = nth_smallest_point(disk_msh, i)
+        
+    print(vector, mid_ind)
+    sys.exit()
     rootNode = Scene(rootNode, gravity=[0.0, -0.0, 0.0], dt=0.001)
     rootNode.createObject('RequiredPlugin', pluginName='SoftRobots')
     rootNode.createObject('VisualStyle',
