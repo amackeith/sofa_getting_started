@@ -1,0 +1,16 @@
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::dump()+0x23) [0x7f7f78b168f3]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::sig(int)+0x1a2) [0x7f7f78b16c42]
+-> /lib/x86_64-linux-gnu/libc.so.6(+0x3efd0) [0x7f7f78445fd0]
+-> /lib/x86_64-linux-gnu/libc.so.6(__sched_yield+0x7) [0x7f7f7850af37]
+-> /home/arthur/.local/lib/python2.7/site-packages/numpy/core/../.libs/libopenblasp-r0-34a18dc3.3.7.so(+0x3134f2) [0x7f7f5a50d4f2]
+-> /lib/x86_64-linux-gnu/libpthread.so.0(+0x76db) [0x7f7f6c7cd6db]
+-> /lib/x86_64-linux-gnu/libc.so.6(clone+0x3f) [0x7f7f78528a3f]
+Command terminated by signal 2
+0.45user 0.25system 0:00.32elapsed 219%CPU (0avgtext+0avgdata 150712maxresident)k
+936inputs+8outputs (3major+9102minor)pagefaults 0swaps

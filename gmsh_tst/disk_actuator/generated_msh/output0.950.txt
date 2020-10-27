@@ -1,0 +1,21 @@
+Warning: Setting a new default format with a different version or profile after the global shared context is created may cause issues with context sharing.
+The constructor with a QGLFormat is deprecated, use the regular contructor instead.
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::dump()+0x23) [0x7f9ef567d8f3]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::sig(int)+0x1a2) [0x7f9ef567dc42]
+-> /lib/x86_64-linux-gnu/libc.so.6(+0x3efd0) [0x7f9ef4facfd0]
+-> /lib/x86_64-linux-gnu/libc.so.6(__poll+0x49) [0x7f9ef5082cf9]
+-> /home/arthur/anaconda3/lib/./libglib-2.0.so.0(+0x52ed3) [0x7f9ee5257ed3]
+-> /home/arthur/anaconda3/lib/./libglib-2.0.so.0(g_main_context_iteration+0x2e) [0x7f9ee5257fee]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QEventDispatcherGlib::processEvents(QFlags<QEventLoop::ProcessEventsFlag>)+0x63) [0x7f9ef46388df]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QEventLoop::exec(QFlags<QEventLoop::ProcessEventsFlag>)+0x187) [0x7f9ef4608eb7]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QCoreApplication::exec()+0x105) [0x7f9ef460caab]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::RealGUI::mainLoop()+0x11f) [0x7f9ef4b7637f]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiCommon.so.20.06.99(sofa::gui::GUIManager::MainLoop(boost::intrusive_ptr<sofa::simulation::Node>, char const*)+0x35) [0x7f9ef7d316c5]
+-> /home/arthur/Documents/sofa/build/master/bin/runSofa(+0x12b69) [0x5579ad304b69]
+-> /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f9ef4f8fb97]
+-> /home/arthur/Documents/sofa/build/master/bin/runSofa(+0x142ea) [0x5579ad3062ea]
+Command terminated by signal 2
+2.38user 0.65system 0:09.47elapsed 32%CPU (0avgtext+0avgdata 299144maxresident)k
+0inputs+48outputs (1major+38776minor)pagefaults 0swaps
