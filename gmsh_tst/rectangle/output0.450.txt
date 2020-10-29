@@ -1,0 +1,48 @@
+CUDA: 1 device(s) found.
+CUDA:  0 : "GeForce GTX 760", 1732/1994 MB, 48 cores at 1.084 GHz, revision 3.0, timeout enabled
+CUDA: Using device 0 : "GeForce GTX 760"
+The constructor with a QGLFormat is deprecated, use the regular contructor instead.
+terminate called after throwing an instance of 'sofa::simulation::PythonEnvironment::system_exit'
+  what():  std::exception
+
+########## SIG 6 - SIGABRT: usually caused by an abort() or assert() ##########
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::dump()+0x20) [0x7f09ac80eca0]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::sig(int)+0x364) [0x7f09ac80f244]
+-> /lib/x86_64-linux-gnu/libc.so.6(+0x46210) [0x7f09abffe210]
+-> /lib/x86_64-linux-gnu/libc.so.6(gsignal+0xcb) [0x7f09abffe18b]
+-> /lib/x86_64-linux-gnu/libc.so.6(abort+0x12b) [0x7f09abfdd859]
+-> /lib/x86_64-linux-gnu/libstdc++.so.6(+0x9e951) [0x7f09ac3e6951]
+-> /lib/x86_64-linux-gnu/libstdc++.so.6(+0xaa47c) [0x7f09ac3f247c]
+-> /lib/x86_64-linux-gnu/libstdc++.so.6(+0xaa4e7) [0x7f09ac3f24e7]
+-> /lib/x86_64-linux-gnu/libstdc++.so.6(+0xaa799) [0x7f09ac3f2799]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaPython.so(+0x22ca8d) [0x7f09a8954a8d]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaPython.so(sofa::component::controller::PythonScriptController::script_onBeginAnimationStep(double)+0xe6) [0x7f09a89622b6]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaSimulationCore.so.20.06.99(void sofa::simulation::Visitor::for_each<sofa::simulation::PropagateEventVisitor, sofa::simulation::Node, sofa::simulation::Node::Sequence<sofa::core::objectmodel::BaseObject, true>, sofa::core::objectmodel::BaseObject>(sofa::simulation::PropagateEventVisitor*, sofa::simulation::Node*, sofa::simulation::Node::Sequence<sofa::core::objectmodel::BaseObject, true> const&, void (sofa::simulation::PropagateEventVisitor::*)(sofa::simulation::Node*, sofa::core::objectmodel::BaseObject*))+0xf9) [0x7f09ad774b89]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaSimulationCore.so.20.06.99(sofa::simulation::PropagateEventVisitor::processNodeTopDown(sofa::simulation::Node*)+0x20) [0x7f09ad774a40]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaSimulationGraph.so.20.06.99(sofa::simulation::graph::DAGNode::executeVisitorTopDown(sofa::simulation::Visitor*, std::__cxx11::list<sofa::simulation::graph::DAGNode*, std::allocator<sofa::simulation::graph::DAGNode*> >&, std::map<sofa::simulation::graph::DAGNode*, sofa::simulation::graph::DAGNode::StatusStruct, std::less<sofa::simulation::graph::DAGNode*>, std::allocator<std::pair<sofa::simulation::graph::DAGNode* const, sofa::simulation::graph::DAGNode::StatusStruct> > >&, sofa::simulation::graph::DAGNode*)+0x392) [0x7f09b4f53f22]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaSimulationGraph.so.20.06.99(sofa::simulation::graph::DAGNode::doExecuteVisitor(sofa::simulation::Visitor*, bool)+0x19d) [0x7f09b4f5341d]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaConstraint.so.20.06.99(sofa::component::animationloop::FreeMotionAnimationLoop::step(sofa::core::ExecParams const*, double)+0xb9d) [0x7f09b2b4703d]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaSimulationCore.so.20.06.99(sofa::simulation::Simulation::animate(sofa::simulation::Node*, double)+0x58) [0x7f09ad7766a8]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::RealGUI::step()+0xcd) [0x7f09b4c378cd]
+-> /lib/x86_64-linux-gnu/libQt5Core.so.5(QMetaObject::activate(QObject*, int, int, void**)+0x7d0) [0x7f09af9ca300]
+-> /lib/x86_64-linux-gnu/libQt5Core.so.5(QTimer::timeout(QTimer::QPrivateSignal)+0x3e) [0x7f09af9d751e]
+-> /lib/x86_64-linux-gnu/libQt5Core.so.5(QObject::event(QEvent*)+0x1d5) [0x7f09af9cacf5]
+-> /lib/x86_64-linux-gnu/libQt5Widgets.so.5(QApplicationPrivate::notify_helper(QObject*, QEvent*)+0x86) [0x7f09b040aa66]
+-> /lib/x86_64-linux-gnu/libQt5Widgets.so.5(QApplication::notify(QObject*, QEvent*)+0x330) [0x7f09b04140f0]
+-> /lib/x86_64-linux-gnu/libQt5Core.so.5(QCoreApplication::notifyInternal2(QObject*, QEvent*)+0x18a) [0x7f09af99e93a]
+-> /lib/x86_64-linux-gnu/libQt5Core.so.5(QTimerInfoList::activateTimers()+0x3d0) [0x7f09af9f58b0]
+-> /lib/x86_64-linux-gnu/libQt5Core.so.5(+0x2de1e4) [0x7f09af9f61e4]
+-> /lib/x86_64-linux-gnu/libglib-2.0.so.0(g_main_context_dispatch+0x27d) [0x7f09ab761fbd]
+-> /lib/x86_64-linux-gnu/libglib-2.0.so.0(+0x52240) [0x7f09ab762240]
+-> /lib/x86_64-linux-gnu/libglib-2.0.so.0(g_main_context_iteration+0x33) [0x7f09ab7622e3]
+-> /lib/x86_64-linux-gnu/libQt5Core.so.5(QEventDispatcherGlib::processEvents(QFlags<QEventLoop::ProcessEventsFlag>)+0x65) [0x7f09af9f6565]
+-> /lib/x86_64-linux-gnu/libQt5Core.so.5(QEventLoop::exec(QFlags<QEventLoop::ProcessEventsFlag>)+0x12b) [0x7f09af99d4db]
+-> /lib/x86_64-linux-gnu/libQt5Core.so.5(QCoreApplication::exec()+0x96) [0x7f09af9a5246]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::RealGUI::mainLoop()+0x171) [0x7f09b4c2f521]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiCommon.so.20.06.99(sofa::gui::GUIManager::MainLoop(boost::intrusive_ptr<sofa::simulation::Node>, char const*)+0x60) [0x7f09b4980a00]
+-> /home/arthur/Documents/sofa/build/master/bin/runSofa() [0x415651]
+-> /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xf3) [0x7f09abfdf0b3]
+-> /home/arthur/Documents/sofa/build/master/bin/runSofa() [0x41098e]
+Command terminated by signal 6
+393.24user 1.94system 10:29.75elapsed 62%CPU (0avgtext+0avgdata 455888maxresident)k
+16inputs+77960outputs (0major+69890minor)pagefaults 0swaps
