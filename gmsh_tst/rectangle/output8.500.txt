@@ -1,0 +1,48 @@
+Warning: Setting a new default format with a different version or profile after the global shared context is created may cause issues with context sharing.
+The constructor with a QGLFormat is deprecated, use the regular contructor instead.
+Xlib: sequence lost (0x1026e > 0x271) in reply type 0x0!
+terminate called after throwing an instance of 'sofa::simulation::PythonEnvironment::system_exit'
+  what():  std::exception
+
+########## SIG 6 - SIGABRT: usually caused by an abort() or assert() ##########
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::dump()+0x23) [0x7f178462b8f3]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::sig(int)+0x1a2) [0x7f178462bc42]
+-> /lib/x86_64-linux-gnu/libc.so.6(+0x3efd0) [0x7f1783f5afd0]
+-> /lib/x86_64-linux-gnu/libc.so.6(gsignal+0xc7) [0x7f1783f5af47]
+-> /lib/x86_64-linux-gnu/libc.so.6(abort+0x141) [0x7f1783f5c8b1]
+-> /home/arthur/anaconda3/lib/libstdc++.so.6(__gnu_cxx::__verbose_terminate_handler()+0xbc) [0x7f178776984a]
+-> /home/arthur/anaconda3/lib/libstdc++.so.6(+0xabf47) [0x7f1787767f47]
+-> /home/arthur/anaconda3/lib/libstdc++.so.6(+0xabf7d) [0x7f1787767f7d]
+-> /home/arthur/anaconda3/lib/libstdc++.so.6(__cxa_rethrow+0) [0x7f178776815a]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaPython.so(+0x22e333) [0x7f1768bd9333]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaPython.so(sofa::component::controller::PythonScriptController::script_onBeginAnimationStep(double)+0xec) [0x7f1768be7b4c]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaSimulationCore.so.20.06.99(sofa::simulation::PropagateEventVisitor::processNodeTopDown(sofa::simulation::Node*)+0x102) [0x7f178573d402]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaSimulationGraph.so.20.06.99(sofa::simulation::graph::DAGNode::executeVisitorTopDown(sofa::simulation::Visitor*, std::__cxx11::list<sofa::simulation::graph::DAGNode*, std::allocator<sofa::simulation::graph::DAGNode*> >&, std::map<sofa::simulation::graph::DAGNode*, sofa::simulation::graph::DAGNode::StatusStruct, std::less<sofa::simulation::graph::DAGNode*>, std::allocator<std::pair<sofa::simulation::graph::DAGNode* const, sofa::simulation::graph::DAGNode::StatusStruct> > >&, sofa::simulation::graph::DAGNode*)+0x2b7) [0x7f1787434d17]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaSimulationGraph.so.20.06.99(sofa::simulation::graph::DAGNode::doExecuteVisitor(sofa::simulation::Visitor*, bool)+0x198) [0x7f17874351d8]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaConstraint.so.20.06.99(sofa::component::animationloop::FreeMotionAnimationLoop::step(sofa::core::ExecParams const*, double)+0x825) [0x7f177b0c4a65]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaSimulationCore.so.20.06.99(sofa::simulation::Simulation::animate(sofa::simulation::Node*, double)+0x6a) [0x7f178573fb6a]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::RealGUI::step()+0xc1) [0x7f1783b26c31]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(+0x2a56cf) [0x7f1783aca6cf]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QMetaObject::activate(QObject*, int, int, void**)+0x780) [0x7f17835ceea4]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QTimer::timeout(QTimer::QPrivateSignal)+0x27) [0x7f17835d6c31]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QTimer::timerEvent(QTimerEvent*)+0x25) [0x7f17835d6df5]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QObject::event(QEvent*)+0x42) [0x7f17835cf1e6]
+-> /home/arthur/anaconda3/lib/libQt5Widgets.so.5(QApplicationPrivate::notify_helper(QObject*, QEvent*)+0xde) [0x7f1776b36ca0]
+-> /home/arthur/anaconda3/lib/libQt5Widgets.so.5(QApplication::notify(QObject*, QEvent*)+0x1a81) [0x7f1776b3cb19]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QCoreApplication::notifyInternal2(QObject*, QEvent*)+0x88) [0x7f17835ba28a]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QTimerInfoList::activateTimers()+0x1dc) [0x7f17835e6040]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(+0x1d8729) [0x7f17835e6729]
+-> /home/arthur/anaconda3/lib/./libglib-2.0.so.0(g_main_context_dispatch+0x2cb) [0x7f1774205d1b]
+-> /home/arthur/anaconda3/lib/./libglib-2.0.so.0(+0x52f61) [0x7f1774205f61]
+-> /home/arthur/anaconda3/lib/./libglib-2.0.so.0(g_main_context_iteration+0x2e) [0x7f1774205fee]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QEventDispatcherGlib::processEvents(QFlags<QEventLoop::ProcessEventsFlag>)+0x63) [0x7f17835e68df]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QEventLoop::exec(QFlags<QEventLoop::ProcessEventsFlag>)+0x187) [0x7f17835b6eb7]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(QCoreApplication::exec()+0x105) [0x7f17835baaab]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::RealGUI::mainLoop()+0x11f) [0x7f1783b2437f]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiCommon.so.20.06.99(sofa::gui::GUIManager::MainLoop(boost::intrusive_ptr<sofa::simulation::Node>, char const*)+0x35) [0x7f1786cdf6c5]
+-> /home/arthur/Documents/sofa/build/master/bin/runSofa(+0x12b69) [0x563c5a02db69]
+-> /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f1783f3db97]
+-> /home/arthur/Documents/sofa/build/master/bin/runSofa(+0x142ea) [0x563c5a02f2ea]
+Command terminated by signal 6
+5.97user 2.04system 0:08.44elapsed 94%CPU (0avgtext+0avgdata 301756maxresident)k
+0inputs+3080outputs (1major+93261minor)pagefaults 0swaps
