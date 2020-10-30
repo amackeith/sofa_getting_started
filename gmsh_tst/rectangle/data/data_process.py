@@ -2,7 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import os, sys
 import matplotlib.pylab as pl
-
+import matplotlib.colors as cl
+import matplotlib
 
 def load_arrays():
     files = os.listdir(".")
@@ -33,19 +34,54 @@ def load_arrays():
 
 def plot_force_over_time(length_scale=None):
 
+
     arrs, _, info, _ = load_arrays()
     
-    lengths = info[:, 0]
+    p = 8
+    arrs = arrs[p:]
+    info = info[p:]
+    lengths = info[:, -1]
+    time_ratio = info[:, 1] / 2
+    arrs = arrs[:]
+    print(time_ratio)
+    exit()
+    forces = []
+    time_ratios = []
+    times = []
+    for i, m in enumerate(arrs):
+        l = m[:, 0, :, 1]
 
-    colors = pl.cm.jet(np.linspace(0, 1, len(arrs)))
-    
-    for i, forces in enumerate(arrs):
-        y_forces = forces[:, 0, :, 1]
-        
-        y_forces = np.sum(y_forces, axis=1)
-        print(y_forces.shape)
-        plt.plot(np.arange(len(y_forces)), y_forces, color=colors[i])
+        print(l.shape)
+        # f = lengths[i] ** -2
+        x = np.sum(l, axis=1) * -1
+        print("x.shape", x.shape)
+        forces.extend(x)
+        time_ratios.extend(np.ones(x.shape)*time_ratio[i])
+        times.extend(np.arange(len(x)))
+
+    forces = np.array(forces)
+    time_ratios = np.array(time_ratios)
+    times = np.array(times)*0.001
+    print(forces.shape, times.shape, time_ratios.shape)
+    plt.scatter(times, forces, c=time_ratios, norm=cl.LogNorm(), s=0.5)
     plt.show()
+    exit()
+
+    print(forces.shape)
+
+
+    #plt.xlabel("Mesh Density (number of nodes)^(1/3)")
+    #plt.ylabel("Total force on Static end")
+    #plt.title("Force at fixed end time= " + str(t * 0.001) + " sec")
+    cb = plt.colorbar()
+    cb.set_label("Compute Time:Simulation Time Ratio")
+    # plt.show()
+    #plt.savefig("ForceFixedEnd" + str(t).zfill(3) + ".png")
+    plt.clf()
+
+plot_force_over_time()
+exit()
+
 
 
 def plot_force_over_scale_at_wall(t):
@@ -98,43 +134,74 @@ def plot_force_over_scale_at_middle(t):
 
 def plot_force_over_lenth_at_wall(t):
     arrs, _, info, _ = load_arrays()
+    p = 8
+    arrs = arrs[p:]
+    info = info[p:]
     lengths = info[:, -1]
+    time_ratio = info[:, 1] / 2
+    arrs = arrs[:]
     print(lengths)
-    colors = pl.cm.jet(np.linspace(0, 1, len(arrs)))
-    
-    for t in range(1000):
+
+
+    #exit()
+    for t in range(100):
         forces = []
         for i, m in enumerate(arrs):
             
             l = m[t, 0, :, 1]
         
-            print(l.shape)# l/(lengths[i]**1), l)
-            f = lengths[i] ** -2
+            print(l.shape)
+            #f = lengths[i] ** -2
             x = np.sum(l)*-1
             print(x.shape)
             forces.append(x)
         
         forces = np.array(forces)
         print(forces.shape)
-        plt.scatter(np.power(lengths, 0.33333)[1:], forces[1:])
+
+        plt.scatter(np.power(lengths, 1.0/3.0), forces, c=time_ratio,
+                    norm=cl.LogNorm())
         #plt.yscale("log")
         #plt.xscale("log")
         plt.xlabel("Mesh Density (number of nodes)^(1/3)")
         plt.ylabel("Total force on Static end")
-        plt.title(str(t))
+        plt.title("Force at fixed end time= "+ str(t*0.001) + " sec")
+        cb = plt.colorbar()
+        cb.set_label("Compute Time:Simulation Time Ratio")
         #plt.show()
-        plt.savefig(str(t)+".png")
+        plt.savefig("ForceFixedEnd" + str(t).zfill(3)+".png")
         plt.clf()
         
         
     
     
     
-plot_force_over_lenth_at_wall(1000)
-plt.show()
-exit()
+#plot_force_over_lenth_at_wall(200)
+#exit()
 
-#plot_force_over_scale_at_wall(800)
+def scale_vs_density():
+    _, _, info, _ = load_arrays()
 
-plt.show()
-#plot_force_over_time(1.0)
+    info = info[8:]
+    print(info[:, 0])
+    fig, ax = plt.subplots()
+    im = ax.scatter(info[:,0], np.power(info[:, -1], 1.0/3.0),  c=info[:, 1]/2,norm=cl.LogNorm())
+    cb = fig.colorbar(im)
+    cb.set_label("Compute Time : Simulation Time Ratio")
+
+    ax.set_ylabel("Mesh Density (number of nodes)^(1/3)")
+    #alt ax.set_ylabel("number of nodes")
+
+    ax.set_xlabel("Length Scale in Gmsh (clscale)")
+
+    ax.set_yscale("log")
+    ax.set_xscale("log")
+
+    fig.suptitle("Mesh length scale vs density with compute time")
+    #ax.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
+    plt.savefig("Scale_density_compute_time_alt_zoom.png")
+    plt.show()
+
+#scale_vs_density()
+#exit()
+
