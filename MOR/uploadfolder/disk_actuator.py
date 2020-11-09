@@ -28,18 +28,13 @@ def createSceneReal(rootNode, dt):
     rootNode.createObject('VisualStyle',
                           displayFlags='showVisualModels hideBehaviorModels showCollisionModels hideBoundingCollisionModels hideForceFields showInteractionForceFields hideWireframe')
 
-    #rootNode.createObject('RequiredPlugin', pluginName='SoftRobots')
-    #rootNode.createObject('VisualStyle',
-    #                      displayFlags='showVisualModels hideBehaviorModels showCollisionModels hideBoundingCollisionModels hideForceFields showInteractionForceFields hideWireframe')
-    rootNode.dt = 0.001
 
     rootNode.createObject('FreeMotionAnimationLoop')
     rootNode.createObject('GenericConstraintSolver', name='gencs', maxIterations='500', printLog='0', tolerance='0.0000001')
-    #disksolver = rootNode.add('SparseLDLSolver', name="solver")
     rootNode.createObject('BackgroundSetting', color='0 0.168627 0.211765')
     YoungModulus = 1800
-    InitialValue = 1000.
-    Translation = None
+    InitialValue = 1000.0
+    Translation="0 0 0"
     Bunny = ElasticMaterialObject(name="disk",
                                   attachedTo=rootNode,
                                   volumeMeshFileName=meshpath+disk_msh,
@@ -47,7 +42,7 @@ def createSceneReal(rootNode, dt):
                                   youngModulus=YoungModulus,
                                   withConstrain=True,
                                   totalMass=1.0,
-                                  translation=None)
+                                  translation="0 0 0")
     
     fixed_const_str = ""
     fixed_const_lst = [274, 309, 344, 345, 770, 783, 807] 
@@ -88,17 +83,13 @@ def createScene(rootNode):
 
     
 
-    import timeit
-    start = timeit.default_timer()
     def animation(target, factor):
-        x = 1
-        #print '\n\n\n\n'
+        #This is a dummy animation function
+        #I would like to use Model Order Reducation on a model that I 
+        #animate, but I want to figure out how to do it with the default one first
+        print "Factor ", factor
         
     
-    
-    
-
-
 
     createSceneReal(rootNode, dt)
     animate(animation, {"target": rootNode}, duration=2, mode="once")
