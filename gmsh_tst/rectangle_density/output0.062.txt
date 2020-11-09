@@ -1,0 +1,8 @@
+CUDA: 1 device(s) found.
+CUDA:  0 : "GeForce GTX 760", 1634/1994 MB, 48 cores at 1.084 GHz, revision 3.0, timeout enabled
+CUDA: Using device 0 : "GeForce GTX 760"
+Qt: Session management error: None of the authentication protocols specified are supported
+The constructor with a QGLFormat is deprecated, use the regular contructor instead.
+Command terminated by signal 9
+14.80user 1.22system 0:16.12elapsed 99%CPU (0avgtext+0avgdata 371632maxresident)k
+489320inputs+16outputs (1293major+74175minor)pagefaults 0swaps

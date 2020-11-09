@@ -38,18 +38,18 @@ def plot_force_over_time(length_scale=None):
     arrs, _, info, _ = load_arrays()
     
     p = 8
+
     arrs = arrs[p:]
     info = info[p:]
     lengths = info[:, -1]
     time_ratio = info[:, 1] / 2
     arrs = arrs[:]
-    print(time_ratio)
-    exit()
+
     forces = []
     time_ratios = []
     times = []
     for i, m in enumerate(arrs):
-        l = m[:, 0, :, 1]
+        l = m[40:100, 0, :, 1]
 
         print(l.shape)
         # f = lengths[i] ** -2
@@ -61,11 +61,10 @@ def plot_force_over_time(length_scale=None):
 
     forces = np.array(forces)
     time_ratios = np.array(time_ratios)
-    times = np.array(times)*0.001
-    print(forces.shape, times.shape, time_ratios.shape)
-    plt.scatter(times, forces, c=time_ratios, norm=cl.LogNorm(), s=0.5)
-    plt.show()
-    exit()
+    times = np.array(times)*0.001+0.04
+    #print(forces.shape, times.shape, time_ratios.shape)
+    plt.scatter(times, forces, c=time_ratios,  cmap=None, norm=cl.LogNorm(), s=0.5)
+
 
     print(forces.shape)
 
@@ -75,14 +74,15 @@ def plot_force_over_time(length_scale=None):
     #plt.title("Force at fixed end time= " + str(t * 0.001) + " sec")
     cb = plt.colorbar()
     cb.set_label("Compute Time:Simulation Time Ratio")
-    # plt.show()
-    #plt.savefig("ForceFixedEnd" + str(t).zfill(3) + ".png")
-    plt.clf()
+    plt.ylabel("Total Force on Fixed side")
+    plt.xlabel("Time (sec)")
+    plt.title("Phase Graph Zoom")
+    #plt.savefig("PhaseGraph_small_2.png")
+    plt.show()
 
-plot_force_over_time()
-exit()
 
-
+#plot_force_over_time()
+#exit()
 
 def plot_force_over_scale_at_wall(t):
     arrs, _, info,_ = load_arrays()
@@ -144,7 +144,7 @@ def plot_force_over_lenth_at_wall(t):
 
 
     #exit()
-    for t in range(100):
+    for t in [400,]:
         forces = []
         for i, m in enumerate(arrs):
             
@@ -158,9 +158,19 @@ def plot_force_over_lenth_at_wall(t):
         
         forces = np.array(forces)
         print(forces.shape)
+        x = np.power(lengths, 1.0 / 3.0)
+        y = forces
+        plt.scatter(x,y, c=time_ratio,
+                    norm=cl.LogNorm(), cmap=None)
 
-        plt.scatter(np.power(lengths, 1.0/3.0), forces, c=time_ratio,
-                    norm=cl.LogNorm())
+        ax = plt.gca()
+        for i in range(len(time_ratio)):
+            print(i)
+            if not i in [13, 15, 17, 19, 23]:
+                continue
+            s = "{:.1e}".format(time_ratio[i])
+            s = s[:]
+            ax.annotate(s, (x[i], y[i]))
         #plt.yscale("log")
         #plt.xscale("log")
         plt.xlabel("Mesh Density (number of nodes)^(1/3)")
@@ -168,24 +178,32 @@ def plot_force_over_lenth_at_wall(t):
         plt.title("Force at fixed end time= "+ str(t*0.001) + " sec")
         cb = plt.colorbar()
         cb.set_label("Compute Time:Simulation Time Ratio")
-        #plt.show()
-        plt.savefig("ForceFixedEnd" + str(t).zfill(3)+".png")
+        plt.show()
+        #plt.savefig("ForceFixedEnd" + str(t).zfill(3)+".png")
         plt.clf()
         
         
     
     
     
-#plot_force_over_lenth_at_wall(200)
-#exit()
+plot_force_over_lenth_at_wall(200)
+exit()
 
 def scale_vs_density():
     _, _, info, _ = load_arrays()
-
+    plt.loglog(info[:, 1], info[:,0])
+    plt.show()
+    exit()
     info = info[8:]
-    print(info[:, 0])
+    num_nodes = info[:, -1]
+    length_scale = info[:,0]
+    time_ratio = info[:, 1]/2
+
     fig, ax = plt.subplots()
-    im = ax.scatter(info[:,0], np.power(info[:, -1], 1.0/3.0),  c=info[:, 1]/2,norm=cl.LogNorm())
+
+    num_nodes = np.power(num_nodes, 1.0/3.0)
+    im = ax.scatter(length_scale, num_nodes,
+                    c=time_ratio,cmap=None , norm=cl.LogNorm())
     cb = fig.colorbar(im)
     cb.set_label("Compute Time : Simulation Time Ratio")
 
@@ -194,14 +212,22 @@ def scale_vs_density():
 
     ax.set_xlabel("Length Scale in Gmsh (clscale)")
 
-    ax.set_yscale("log")
-    ax.set_xscale("log")
+    #ax.set_yscale("log")
+    #ax.set_xscale("log")
 
     fig.suptitle("Mesh length scale vs density with compute time")
     #ax.get_xaxis().set_major_formatter(matplotlib.ticker.ScalarFormatter())
-    plt.savefig("Scale_density_compute_time_alt_zoom.png")
-    plt.show()
+    ax = plt.gca()
+    for i in range(len(time_ratio)):
+        print(i)
+        if not i in [14,16, 18, 20, 24,26]:
+            continue
+        s = "{:.1e}".format(time_ratio[i])
+        s = s[:]
+        ax.annotate(s, (length_scale[i], num_nodes[i]))
+    plt.savefig("Scale_density_compute_time_annotated.png")
+    #plt.show()
 
-#scale_vs_density()
-#exit()
+scale_vs_density()
+exit()
 
