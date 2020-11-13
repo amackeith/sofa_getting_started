@@ -1,0 +1,4 @@
+Warning: Setting a new default format with a different version or profile after the global shared context is created may cause issues with context sharing.
+The constructor with a QGLFormat is deprecated, use the regular contructor instead.
+34.36user 3.93system 0:39.28elapsed 97%CPU (0avgtext+0avgdata 364508maxresident)k
+0inputs+64outputs (1major+118789minor)pagefaults 0swaps

@@ -60,7 +60,7 @@ def createSceneReal(rootNode, dt,     fixed_const_lst, moving_const_lst, length_
 
     inds = "7 63 62 60 5 254 240 206 236 47 68 69 253"
 
-    Block.createObject('PartialLinearMovementConstraint', indices=moving_const_str, keyTimes='0 '+str(dt)+" 1000000", template='Vec3d',
+    Block.createObject('PartialLinearMovementConstraint', indices=moving_const_str, keyTimes='0 '+str(0.001)+" 1000000", template='Vec3d',
                           movements='0. 0. 0. 0. -1 0. 0. -1 0.')
     #cavity = PneumaticCavity(name='Cavity', attachedAsAChildOf=Block,
     #                         surfaceMeshFileName=meshpath + block_inside_stl, valueType='pressureGrowth',
@@ -133,6 +133,7 @@ def createScene(rootNode):
     def ExitFunc(target, factor):
         runtime = timeit.default_timer() - start
         info_arr[1] = runtime
+        length_scale = size = "{:<07}".format(dt)
         print "runtime", runtime, "number of nodes ", num_nodes
         np.save('output'+str(length_scale)+'.npy', np.array(list_of_vectors_static))
         np.save('output' + str(length_scale) + '_middle.npy', np.array(list_of_vectors_static))
@@ -146,7 +147,7 @@ def createScene(rootNode):
 
 
     createSceneReal(rootNode, dt, fixed_const_lst, moving_const_lst, str(length_scale))
-    animate(animation, {"target": rootNode}, duration=2.0, mode="once", onDone=ExitFunc)
+    animate(animation, {"target": rootNode}, duration=1.0, mode="once", onDone=ExitFunc)
 
     return rootNode
     
