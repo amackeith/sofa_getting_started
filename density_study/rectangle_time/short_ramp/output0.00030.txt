@@ -1,0 +1,35 @@
+Warning: Setting a new default format with a different version or profile after the global shared context is created may cause issues with context sharing.
+The constructor with a QGLFormat is deprecated, use the regular contructor instead.
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::dump()+0x23) [0x7f97ed1328f3]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::sig(int)+0x1a2) [0x7f97ed132c42]
+-> /lib/x86_64-linux-gnu/libc.so.6(+0x3efd0) [0x7f97eca61fd0]
+-> /lib/x86_64-linux-gnu/libc.so.6(__poll+0x49) [0x7f97ecb37cf9]
+-> /usr/lib/x86_64-linux-gnu/libxcb.so.1(+0xb747) [0x7f97d5eca747]
+-> /usr/lib/x86_64-linux-gnu/libxcb.so.1(xcb_wait_for_event+0x4a) [0x7f97d5ecc36a]
+-> /home/arthur/anaconda3/plugins/platforms/../../lib/libQt5XcbQpa.so.5(+0x3ab38) [0x7f97cdb4bb38]
+-> /home/arthur/anaconda3/lib/libQt5Core.so.5(+0xa189d) [0x7f97ebfb689d]
+-> /lib/x86_64-linux-gnu/libpthread.so.0(+0x76db) [0x7f97e0de96db]
+-> /lib/x86_64-linux-gnu/libc.so.6(clone+0x3f) [0x7f97ecb44a3f]
+Command terminated by signal 2
+10.24user 1.06system 0:47.98elapsed 23%CPU (0avgtext+0avgdata 324844maxresident)k
+474696inputs+56outputs (1293major+50566minor)pagefaults 0swaps

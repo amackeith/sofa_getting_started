@@ -1,0 +1,66 @@
+[INFO]    [runSofa] PluginRepository paths = /builds/build/master/plugins:/builds/build/master/lib
+[INFO]    [runSofa] DataRepository paths = /builds/src/share:/builds/src/examples
+[INFO]    [runSofa] GuiDataRepository paths = /builds/src/applications/projects/runSofa/resources:/builds/src/modules/SofaGuiQt/src/sofa/gui/qt/resources
+Created directory: /builds/build/master/config
+Created directory: /builds/build/master/screenshots
+[INFO]    [runSofa] Loading automatically plugin list in /builds/build/master/lib/plugin_list.conf.default
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSofaSparseSolver.so
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSofaPreconditioner.so
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSofaHaptics.so
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSofaValidation.so
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSofaDenseSolver.so
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSofaNonUniformFem.so
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSofaOpenglVisual.so
+[INFO]    [SofaPython] Added '/builds/plugins/STLIB/python' to sys.path
+[INFO]    [SofaPython] Added '/builds/src/applications/plugins/SofaPython/python' to sys.path
+[INFO]    [SofaPython] Added '/builds/plugins/SoftRobots/python' to sys.path
+[INFO]    [SofaPython] Added '/builds/plugins/ModelOrderReduction/python' to sys.path
+[INFO]    [SofaPython] Added '/builds/src/applications/plugins/SofaTest/python' to sys.path
+[WARNING] [PythonEnvironment] No python dir found in /builds/build/master
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSofaPython.so
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSofaExporter.so
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libCImgPlugin.so
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSofaMiscCollision.so
+[INFO]    [GUIManager] INFO(SofaGUI): lastUsedGUI.ini not found; using default GUI.
+
+info arra  [  5.50000000e-01   0.00000000e+00   1.00000000e-03   8.80000000e+02]
+number of nodes 880  num end nodes  84  num mid nodes  90
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSTLIB.so
+[WARNING] [PythonEnvironment] No python dir found in /builds/build/master
+[INFO]    [PluginManager] Loaded plugin: /builds/build/master/lib/libSoftRobots.so
+[INFO]    [PythonScript] Missing RequiredPlugin SofaSparseSolver in the scene, add it from Prefab ElasticMaterialObject.
+[WARNING] [SofaPython] You are trying to convert a non primitive type to Sofa using the 'str' operator.  
+Automatic conversion is provided for: String, Integer, Long, Float and Bool and Sequences.  
+Other objects should implement the method getAsACreateObjectParameter().   
+This function should return a string usable as a parameter in createObject().  
+So to remove this message you must add a method getAsCreateObjectParameter(self) to the object you are passing the createObject function.  
+Python Stack: 
+ in /builds/plugins/STLIB/python/stlib/physics/deformable/elasticmaterialobject.py:59:createPrefab()  
+  ->             self.loader = self.node.createObject('MeshGmshLoader', name='loader', filename=volumeMeshFileName, rotation=rotation, translation=translation, scale3d=scale)
+  
+
+[WARNING] [MeshGmshLoader(loader)] Could not read value for data field translation: None
+moving  1 3 5 7 43 44 45 46 47 48 49 71 72 73 74 75 76 77 99 100 101 102 103 104 105 113 114 115 116 117 118 119 598 599 600 601 602 603 604 605 606 607 608 609 610 611 612 613 614 615 616 617 618 619 620 621 622 623 624 625 626 627 628 629 630 631 632 633 634 635 636 637 638 639 640 641 642 643 644 645 646 647 648 649 650 651 652
+fixed   0 2 4 6 36 37 38 39 40 41 42 64 65 66 67 68 69 70 92 93 94 95 96 97 98 106 107 108 109 110 111 112 546 547 548 549 550 551 552 553 554 555 556 557 558 559 560 561 562 563 564 565 566 567 568 569 570 571 572 573 574 575 576 577 578 579 580 581 582 583 584 585 586 587 588 589 590 591 592 593 594 595 596 597
+[WARNING] [SofaPython] You are trying to convert a non primitive type to Sofa using the 'str' operator.  
+Automatic conversion is provided for: String, Integer, Long, Float and Bool and Sequences.  
+Other objects should implement the method getAsACreateObjectParameter().   
+This function should return a string usable as a parameter in createObject().  
+So to remove this message you must add a method getAsCreateObjectParameter(self) to the object you are passing the createObject function.  
+Python Stack: 
+ in block_test.py:78:createSceneReal()  
+  ->     BlockVisu.createObject('OglModel', template='ExtVec3f', color='0.3 0.2 0.2 0.6', translation=Translation)
+  
+
+[WARNING] [OglModel(OglModel)] Could not read value for data field translation: None
+[WARNING] [OglModel(OglModel)] Template ExtVec3f incorrect, used Vec3d
+[INFO]    [SceneCheckerVisitor] Validating node "root" with checks: [SceneCheckDuplicatedName, SceneCheckMissingRequiredPlugin, SceneCheckUsingAlias]
+[WARNING] [SceneCheckDuplicatedName]   
+- Found duplicated names ['RequiredPlugin', 'VisualStyle', ] in node '/'  
+Nodes with similar names at the same level in your scene can crash certain operations, please rename them
+[WARNING] [SceneCheckMissingRequiredPlugin] This scene is using component defined in plugins but is not importing the required plugins.  
+  Your scene may not work on a sofa environment with different pre-loaded plugins.  
+  To fix your scene and remove this warning you just need to cut & paste the following lines at the begining of your scene (if it is a .scn):   
+  <RequiredPlugin pluginName='SofaOpenglVisual'/> <!-- Needed to use components [OglModel, ]-->
+[INFO]    [SceneCheckerVisitor] Finished validating node "root".
+runtime 99.2314810753 number of nodes  880

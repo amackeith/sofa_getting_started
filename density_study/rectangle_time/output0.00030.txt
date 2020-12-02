@@ -1,0 +1,32 @@
+Warning: Setting a new default format with a different version or profile after the global shared context is created may cause issues with context sharing.
+The constructor with a QGLFormat is deprecated, use the regular contructor instead.
+
+########## SIG 2 - SIGINT: interactive attention signal, probably a ctrl+c ##########
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::dump()+0x23) [0x7f66b73a78f3]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaHelper.so.20.06.99(sofa::helper::BackTrace::sig(int)+0x1a2) [0x7f66b73a7c42]
+-> /lib/x86_64-linux-gnu/libc.so.6(+0x3efd0) [0x7f66b6cd6fd0]
+-> /lib64/ld-linux-x86-64.so.2(+0xa316) [0x7f66ba3e0316]
+-> /lib64/ld-linux-x86-64.so.2(+0xb23f) [0x7f66ba3e123f]
+-> /lib64/ld-linux-x86-64.so.2(+0xff13) [0x7f66ba3e5f13]
+-> /lib64/ld-linux-x86-64.so.2(+0x1781a) [0x7f66ba3ed81a]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::data_widget_container<double>::createWidgets(sofa::gui::qt::DataWidget*, double const&, bool)+0x70) [0x7f66b68c8b70]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::helper::Creator<sofa::helper::Factory<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, sofa::gui::qt::DataWidget, sofa::gui::qt::DataWidget::CreatorArgument, sofa::gui::qt::DataWidget*>, sofa::gui::qt::SimpleDataWidget<double, sofa::gui::qt::data_widget_container<double> > >::createInstance(sofa::gui::qt::DataWidget::CreatorArgument)+0xcb) [0x7f66b68ccb4b]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::helper::Factory<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, sofa::gui::qt::DataWidget, sofa::gui::qt::DataWidget::CreatorArgument, sofa::gui::qt::DataWidget*>::createAnyObject(sofa::gui::qt::DataWidget::CreatorArgument)+0xb4) [0x7f66b68551a4]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::DataWidget::CreateDataWidget(sofa::gui::qt::DataWidget::CreatorArgument const&)+0x12d) [0x7f66b685142d]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::QMouseOperation::createWidgetFromData(sofa::core::objectmodel::BaseData*)+0x8c) [0x7f66b688833c]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::QAttachOperation::QAttachOperation()+0x1b3) [0x7f66b6888643]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::TOperationCreator<sofa::gui::qt::QAttachOperation>::create() const+0x1b) [0x7f66b68ea88b]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiCommon.so.20.06.99(sofa::gui::PickHandler::changeOperation(sofa::gui::MOUSE_BUTTON, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)+0x142) [0x7f66b9a60282]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::SofaMouseManager::updateOperation(sofa::gui::MOUSE_BUTTON, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)+0xd) [0x7f66b68e6f2d]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::SofaMouseManager::setPickHandler(sofa::gui::PickHandler*)+0x59) [0x7f66b68e8889]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::RealGUI::initViewer(sofa::gui::BaseViewer*)+0x309) [0x7f66b68a85c9]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::RealGUI::createViewer(char const*, bool)+0x2ee) [0x7f66b68a8b7e]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::RealGUI::RealGUI(char const*)+0x857) [0x7f66b68ac4f7]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiQt.so.20.06.99(sofa::gui::qt::RealGUI::CreateGUI(char const*, boost::intrusive_ptr<sofa::simulation::Node>, char const*)+0x34) [0x7f66b68ac924]
+-> /home/arthur/Documents/sofa/build/master/lib/libSofaGuiCommon.so.20.06.99(sofa::gui::GUIManager::createGUI(boost::intrusive_ptr<sofa::simulation::Node>, char const*)+0xbb) [0x7f66b9a5aedb]
+-> /home/arthur/Documents/sofa/build/master/bin/runSofa(+0x124a5) [0x55c0a306a4a5]
+-> /lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0xe7) [0x7f66b6cb9b97]
+-> /home/arthur/Documents/sofa/build/master/bin/runSofa(+0x142ea) [0x55c0a306c2ea]
+Command terminated by signal 2
+0.74user 0.41system 0:00.63elapsed 181%CPU (0avgtext+0avgdata 224532maxresident)k
+16inputs+16outputs (0major+18729minor)pagefaults 0swaps
