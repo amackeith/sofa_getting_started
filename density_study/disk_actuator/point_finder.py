@@ -1,7 +1,8 @@
 import numpy as np
-import matplotlib.pyplot as plt
 import sys, os
 
+
+#this is code for gathering information about the points in a given mesh
 
 def get_nodes(filename):
     nodes = []
