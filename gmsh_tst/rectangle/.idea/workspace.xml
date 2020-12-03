@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="2be83888-6ba3-4571-ac62-f138a87cb6fd" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../../MOR/uploadfolder/mor_output/debug/debug_scene.py" beforeDir="false" afterPath="$PROJECT_DIR$/../../MOR/uploadfolder/mor_output/debug/debug_scene.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rectangle_time/output0.0001.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../rectangle_time/output0.0001.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rectangle_time/output0.001.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../rectangle_time/output0.001.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rectangle_time/output0.010.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../rectangle_time/output0.010.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rectangle_time/output0.100.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../rectangle_time/output0.100.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rectangle_time/output0.550_info.npy" beforeDir="false" afterPath="$PROJECT_DIR$/../rectangle_time/output0.550_info.npy" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rectangle_time/output1.000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../rectangle_time/output1.000.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../rectangle_time/output2.000.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../rectangle_time/output2.000.txt" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="JupyterTrust" id="a198a8b5-1d9b-45d7-bd47-541d3995c038" />
+  <component name="ProjectId" id="1jTQDouvC5GFxMfVLoylhebrm36" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../disk_actuator/generated_msh/output/process_ouput.py" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2be83888-6ba3-4571-ac62-f138a87cb6fd" name="Default Changelist" comment="" />
+      <created>1603825486554</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1603825486554</updated>
+      <workItem from="1603825490418" duration="12786000" />
+      <workItem from="1603848879753" duration="198000" />
+      <workItem from="1603849239693" duration="3384000" />
+      <workItem from="1604029831698" duration="17892000" />
+      <workItem from="1606876463550" duration="294000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2127" y="551" width="680" height="735" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1604030472663">
+      <screen x="1920" y="0" width="1080" height="1920" />
+    </state>
+    <state x="2127" y="551" width="680" height="735" key="#com.intellij.fileTypes.FileTypeChooser/72.867.1848.1053/1920.0.1080.1920@1920.0.1080.1920" timestamp="1604030472663" />
+    <state x="427" y="1169" width="680" height="403" key="#com.intellij.fileTypes.FileTypeChooser/72.867.1848.1053/1920.0.1080.1920@72.867.1848.1053" timestamp="1603825494424" />
+    <state x="296" y="1234" width="424" height="491" key="FileChooserDialogImpl" timestamp="1606876754332">
+      <screen x="72" y="867" width="1848" height="1053" />
+    </state>
+    <state x="296" y="1234" width="424" height="491" key="FileChooserDialogImpl/72.867.1848.1053/1920.0.1080.1920@72.867.1848.1053" timestamp="1606876754332" />
+    <state x="261" y="1002" width="1022" height="737" key="SettingsEditor" timestamp="1603825518810">
+      <screen x="72" y="867" width="1848" height="1053" />
+    </state>
+    <state x="261" y="1002" width="1022" height="737" key="SettingsEditor/72.867.1848.1053/1920.0.1080.1920@72.867.1848.1053" timestamp="1603825518810" />
+    <state x="610" y="1054" width="762" height="686" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1603829487001">
+      <screen x="72" y="867" width="1848" height="1053" />
+    </state>
+    <state x="610" y="1054" width="762" height="686" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/72.867.1848.1053/1920.0.1080.1920@72.867.1848.1053" timestamp="1603829487001" />
+    <state x="687" y="958" width="618" height="870" key="find.popup" timestamp="1603825556137">
+      <screen x="72" y="867" width="1848" height="1053" />
+    </state>
+    <state x="687" y="958" width="618" height="870" key="find.popup/72.867.1848.1053/1920.0.1080.1920@72.867.1848.1053" timestamp="1603825556137" />
+    <state x="2123" y="449" width="672" height="678" key="search.everywhere.popup" timestamp="1606876665653">
+      <screen x="1920" y="0" width="1080" height="1920" />
+    </state>
+    <state x="2123" y="449" width="672" height="678" key="search.everywhere.popup/72.867.1848.1053/1920.0.1080.1920@1920.0.1080.1920" timestamp="1606876665653" />
+  </component>
+</project>
